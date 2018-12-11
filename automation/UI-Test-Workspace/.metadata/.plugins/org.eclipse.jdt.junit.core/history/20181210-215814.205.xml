@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NssTodoUiTestDemo (1)" project="NssTodoTest" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="selenium.NssTodoUiTestDemo" time="4.121">
+    <testcase name="TestCreateTaskWithFutureDueDate" classname="selenium.NssTodoUiTestDemo" time="1.095"/>
+    <testcase name="TestCreateEmptyTask" classname="selenium.NssTodoUiTestDemo" time="0.416"/>
+    <testcase name="TestCreateTaskWithoutCategory" classname="selenium.NssTodoUiTestDemo" time="0.614"/>
+    <testcase name="TestCreateTaskWithPastDueDateNoCategory" classname="selenium.NssTodoUiTestDemo" time="0.981"/>
+    <testcase name="TestCreateTaskWithCategory" classname="selenium.NssTodoUiTestDemo" time="1.015"/>
+  </testsuite>
+</testrun>

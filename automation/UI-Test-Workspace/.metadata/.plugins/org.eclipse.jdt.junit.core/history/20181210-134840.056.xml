@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun selenium.Soution" project="NssTodoTest" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="selenium.Soution" time="3.593">
+    <testcase name="TestCreateEmptyTask" classname="selenium.Soution" time="0.597"/>
+    <testcase name="TestCreateTaskWithoutCategory" classname="selenium.Soution" time="0.704"/>
+    <testcase name="TestCreateTaskWithDueDate" classname="selenium.Soution" time="1.035"/>
+    <testcase name="TestCreateTaskWithCategory" classname="selenium.Soution" time="1.257"/>
+  </testsuite>
+</testrun>

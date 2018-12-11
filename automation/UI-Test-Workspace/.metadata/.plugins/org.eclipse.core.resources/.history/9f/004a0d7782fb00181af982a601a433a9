@@ -1,0 +1,26 @@
+package selenium;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+
+public class Soution {
+
+	public static void main(String[] args) throws Exception {
+		
+		// Set ChromeDriver executable path
+		System.setProperty("webdriver.chrome.driver", "C://Selenium//chromedriver.exe");
+		
+		// Initialize Chrome driver
+		WebDriver driver = new ChromeDriver();
+		
+		// Load browser with home page of NSS-TODO-Automation
+		driver.get("http://localhost/nss-todo-automation/index.php");
+		
+		
+		
+		Thread.sleep(3000);
+		
+		driver.close();
+	}
+
+}

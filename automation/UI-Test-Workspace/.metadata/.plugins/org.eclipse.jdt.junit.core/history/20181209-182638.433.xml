@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Soution (1)" project="NssTodoTest" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="selenium.Soution" time="0.0">
+    <testcase name="initializationError" classname="selenium.Soution" time="0.0">
+      <error>java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing&#13;
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)&#13;
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1016)&#13;
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:174)&#13;
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:802)&#13;
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:700)&#13;
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:623)&#13;
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)&#13;
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)&#13;
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)&#13;
+	at org.junit.internal.builders.JUnit4Builder.runnerForClass(JUnit4Builder.java:10)&#13;
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)&#13;
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)&#13;
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)&#13;
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)&#13;
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.createUnfilteredTest(JUnit4TestLoader.java:90)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.createTest(JUnit4TestLoader.java:76)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.loadTests(JUnit4TestLoader.java:49)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:525)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)&#13;
+Caused by: java.lang.ClassNotFoundException: org.hamcrest.SelfDescribing&#13;
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)&#13;
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)&#13;
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)&#13;
+	... 22 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

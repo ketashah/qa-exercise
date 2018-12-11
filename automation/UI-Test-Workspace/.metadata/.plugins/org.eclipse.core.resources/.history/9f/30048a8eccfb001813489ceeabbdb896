@@ -1,0 +1,30 @@
+package selenium;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Soution {
+
+	public static void main(String[] args) throws Exception {
+		
+		// Environment Variable PATH refers to this directory. No need to add it everytime
+		// System.setProperty("webdriver.chrome.driver", "C://Selenium//chromedriver.exe");
+		
+		// Initialize browser
+		WebDriver driver = new ChromeDriver();
+		
+		// Open home page of NSS-TODO-Automation
+		driver.get("http://localhost/nss-todo-automation/index.php");
+		
+		// Maximize browser 
+		driver.manage().window().maximize();
+		
+		// Wait for 3 seconds
+		Thread.sleep(3000);
+		 
+		// Close browser
+		driver.close();
+	}
+
+}

@@ -1,0 +1,113 @@
+package selenium;
+
+import java.util.List;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.support.ui.Select;
+
+public class Soution {
+
+	public static void main(String[] args) throws Exception {
+		
+		// Environment Variable PATH refers to this directory. No need to add it everytime
+		// System.setProperty("webdriver.chrome.driver", "C://Selenium//chromedriver.exe");
+		
+		// Initialize browser
+		WebDriver driver = new ChromeDriver();
+		
+		// Open home page of NSS-TODO-Automation
+		driver.get("http://localhost/nss-todo-automation/index.php");
+		
+		// Maximize browser 
+		driver.manage().window().maximize();
+				
+		try {
+			List<WebElement> taskObjs = driver.findElements(By.tagName("li"));
+			System.out.println(taskObjs.size());
+			
+			// Test different scenarios of adding Task
+			TestTaskAddition(driver);
+			
+			// Wait for 3 seconds
+			Thread.sleep(3000);
+			 
+			// Close browser
+			driver.close();	
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		
+	}
+	
+	public static void TestTaskAddition(WebDriver driver) throws InterruptedException {
+		
+		WebElement txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		WebElement btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		
+		// Case 1: Create task without name shouldn't add any task
+		List<WebElement> taskListBefore = driver.findElements(By.tagName("li"));
+		txtTaskName.clear();
+		btnAddTask.click();
+		List<WebElement> taskListAfter = driver.findElements(By.tagName("li"));
+		if(taskListBefore.size() == taskListAfter.size()) {
+			System.out.println("PASS - Empty Task should not be created");
+		}
+		else {
+			System.out.println("FAIL - Empty Task should not be created");
+		}
+		Thread.sleep(500);
+		
+		// Case 2: Create task without category
+		String taskName = "Test task without category";
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		txtTaskName.sendKeys(taskName);
+		btnAddTask.click();
+		if(!driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName + "')]]")).isEmpty()) {
+			System.out.println("PASS - Task Creation without category");
+		}
+		else {
+			System.out.println("FAIL - Task Creation without category");
+		}
+		Thread.sleep(500);
+		
+		// Case 3: Create task without category
+		String taskName2 = "Test task with category";
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		WebElement categoryDropDown = driver.findElement(By.name("category"));
+		Select categorySelect = new Select(categoryDropDown);
+		
+		txtTaskName.sendKeys(taskName2);
+		categorySelect.selectByVisibleText("Leisure");
+		btnAddTask.click();
+		if(!driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName2 + "')]]")).isEmpty()) {
+			System.out.println("PASS - Task Creation with category");
+		}
+		else {
+			System.out.println("FAIL - Task Creation with category");
+		}
+		
+		
+		// Case 4: Create task with due date
+		String taskName3 = "Test task with due date and category";
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		categoryDropDown = driver.findElement(By.name("category"));
+		categorySelect = new Select(categoryDropDown);
+		
+		txtTaskName.sendKeys(taskName3);
+		categorySelect.selectByVisibleText("Personal");
+		btnAddTask.click();
+		if(!driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName3 + "')]]")).isEmpty()) {
+			System.out.println("PASS - Task Creation with category");
+		}
+		else {
+			System.out.println("FAIL - Task Creation with category");
+		}
+	}
+
+}

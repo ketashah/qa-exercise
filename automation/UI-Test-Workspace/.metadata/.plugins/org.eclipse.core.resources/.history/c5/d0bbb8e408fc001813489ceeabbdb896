@@ -1,0 +1,199 @@
+package selenium;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.support.ui.Select;
+
+public class Soution {
+
+	WebDriver driver = new ChromeDriver();
+	
+	// Declare UI elements
+	WebElement txtTaskName;
+	WebElement btnAddTask;
+	WebElement categoryDropDown;
+	Select categorySelect;
+	
+	WebElement dueDay;
+	Select dueDaySelect;
+	
+	WebElement dueMonth;
+	Select dueMonthSelect;
+	
+	
+	List<WebElement> taskListBefore = driver.findElements(By.tagName("li"));
+	
+	@BeforeClass
+	public void Initialize() {
+		
+		// Open home page of NSS-TODO-Automation
+		driver.get("http://localhost/nss-todo-automation/index.php");
+		
+		// Maximize browser 
+		driver.manage().window().maximize();
+	}
+	
+	@AfterClass
+	public void CleanUp() {
+		driver.close();
+	}
+	
+	
+	@Before
+	public void SetUp() {
+		
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		
+		categoryDropDown = driver.findElement(By.name("category"));
+		categorySelect = new Select(categoryDropDown);
+		
+		dueDay = driver.findElement(By.name("due_day"));
+		dueDaySelect = new Select(dueDay);
+		
+		dueMonth = driver.findElement(By.name("due_month"));
+		dueMonthSelect = new Select(dueMonth);
+		
+		
+		
+	}
+	
+	@After
+	public void TearDown() {
+		
+	}
+	
+	
+	public static void main(String[] args) throws Exception {
+		
+		// Environment Variable PATH refers to this directory. No need to add it everytime
+		// System.setProperty("webdriver.chrome.driver", "C://Selenium//chromedriver.exe");
+		
+		// Initialize browser
+		
+				
+		try {
+			List<WebElement> taskObjs = driver.findElements(By.tagName("li"));
+			System.out.println(taskObjs.size());
+			
+			// Test different scenarios of adding Task
+			TestTaskAddition(driver);
+			
+			// Wait for 3 seconds
+			Thread.sleep(3000);
+			 
+			// Close browser
+			driver.close();	
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		
+	}
+	
+	@Test
+	public void TestCreateTaskWithoutCategory() {
+		
+		String taskName = "Test create task without category";
+		txtTaskName.sendKeys(taskName);
+		btnAddTask.click();
+		assertTrue("Task without category not created successfully", !driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName + "')]]")).isEmpty());
+	}
+	
+	@Test
+	public void TestCreateTaskWithCategory() {
+		String taskName = "Test create task with category";
+		txtTaskName.sendKeys(taskName);
+		categorySelect.selectByVisibleText("Leisure");
+		btnAddTask.click();
+		List<WebElement> foundTasks = driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName + "')]]"));
+		assertTrue("Task with category not created successfully", !foundTasks.isEmpty());
+		
+		WebElement createdTask = foundTasks.get(0);
+		//TODO - check category is matching
+		
+	}
+	
+	@Test
+	public void TestCreateTaskWithDueDate() {
+		
+	}
+	
+	@Test
+	// Create task without name shouldn't add any task
+	public void TestCreateEmptyTask() throws InterruptedException {
+				
+		List<WebElement> taskListBefore = driver.findElements(By.tagName("li"));
+		txtTaskName.clear();
+		btnAddTask.click();
+		List<WebElement> taskListAfter = driver.findElements(By.tagName("li"));
+		assertEquals("Empty task was created. It shouldn't be allowed", taskListBefore.size(), taskListAfter.size());
+		
+		/*if(taskListBefore.size() == taskListAfter.size()) {
+			System.out.println("PASS - Empty Task should not be created");
+		}
+		else {
+			System.out.println("FAIL - Empty Task should not be created");
+		}
+		Thread.sleep(500);*/
+		
+		// Case 2: Create task without category
+		
+		
+/*		// Case 3: Create task with category
+		String taskName2 = "Test task with category";
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		txtTaskName.sendKeys(taskName2);
+		categorySelect.selectByVisibleText("Leisure");
+		btnAddTask.click();
+		if(!driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName2 + "')]]")).isEmpty()) {
+			System.out.println("PASS - Task Creation with category");
+		}
+		else {
+			System.out.println("FAIL - Task Creation with category");
+		}*/
+		
+		// Case 4: Create task with due date
+		String taskName3 = "Test task with due date and category";
+		txtTaskName = driver.findElement(By.xpath("//input[@name='data']"));
+		btnAddTask = driver.findElement(By.xpath("//input[@value='Add']"));
+		categoryDropDown = driver.findElement(By.name("category"));
+		categorySelect = new Select(categoryDropDown);
+		
+		WebElement dueDay = driver.findElement(By.name("due_day"));
+		Select dueDaySelect = new Select(dueDay);
+		dueDaySelect.selectByValue("22");
+		
+		WebElement dueMonth = driver.findElement(By.name("due_month"));
+		Select dueMonthSelect = new Select(dueMonth);
+		dueMonthSelect.selectByValue("8");
+		
+		WebElement dueYear = driver.findElement(By.name("due_year"));
+		Select dueYearSelect = new Select(dueYear);
+		dueYearSelect.selectByValue("2019");
+		
+		txtTaskName.sendKeys(taskName3);
+		categorySelect.selectByVisibleText("Personal");
+		btnAddTask.click();
+		if(!driver.findElements(By.xpath("//*[text() [contains(.,'" + taskName3 + "')]]")).isEmpty()) {
+			System.out.println("PASS - Task Creation with due date & category");
+		}
+		else {
+			System.out.println("FAIL - Task Creation with due date & category");
+		}
+	}
+
+}
