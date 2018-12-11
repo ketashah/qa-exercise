@@ -1,0 +1,34 @@
+{
+  "trigger_url": "https://api.runscope.com/radar/cea41b45-b31b-441b-b514-3955c7935337/trigger", 
+  "name": "TODO-API", 
+  "version": "1.0", 
+  "exported_at": 1544496665, 
+  "steps": [
+    {
+      "skipped": false, 
+      "url": "http://localhost/nss-todo-automation/fake-API-call.php", 
+      "variables": [], 
+      "args": {}, 
+      "step_type": "request", 
+      "auth": {}, 
+      "fragment": "", 
+      "note": "", 
+      "headers": {}, 
+      "assertions": [
+        {
+          "comparison": "equal_number", 
+          "value": 200, 
+          "source": "response_status"
+        }
+      ], 
+      "scripts": [
+        "// Underscore.js is included in in Runscope's in-built library collection. Using it's functions vastly for cleaner and faster use.\n\n// save response body to variable\nvar res = response.body;\n\n// parse response body string to JSON object \nvar resObj = JSON.parse(res);\n\n// log(resObj);\n\n// Test 2: Log how many number of task are not assigned Category\nvar taskWithoutCategory = _.reduce(resObj, function(counter, task) {\n    if(task.category){\n        return counter;\n    }\n    else{\n        return counter + 1;\n    }\n}, 0);\nlog(\"Task without Category = \" + taskWithoutCategory);\n\n// Test 3: Aggregate and print only \"task names\"\nvar taskNameString = _.reduce(resObj, function(taskName, task) {\n    return taskName + task[\"task name\"] + \"\\r\\n\";\n}, \"\");\nlog(\"Task Names = \" + \"\\r\\n\" + taskNameString);\n\n\n// var dueDateString = _.reduce(resObj, function(dueDate, task) {\n//     return dueDate + task[\"due date\"].replace(/(\\r\\n|\\n|\\r)/gm,\"\") + \"\\r\\n\";\n// }, \"\");\n// log(\"Due Dates = \" + \"\\r\\n\" + dueDateString);\n\n// Test 4: print tasks in descending \"due date\" order\nvar sortedByDueDate = _.sortBy(resObj, function(task){\n  return task[\"due date\"].replace(/(\\r\\n|\\n|\\r)/gm,\"\")\n});\nvar sortedByDueDateDesc = sortedByDueDate.reverse();\nlog(sortedByDueDateDesc);\n\n// Test 5: Count and validate the number of tasks\n// log(\"Number of tasks in response = \" + resObj.length);\nassert.equal(resObj.length, 9, \"Number of tasks matches\");\n"
+      ], 
+      "multipart_form": [], 
+      "before_scripts": [], 
+      "data": "", 
+      "method": "GET"
+    }
+  ], 
+  "description": null
+}

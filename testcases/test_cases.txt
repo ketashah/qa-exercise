@@ -1,1 +1,90 @@
-//please add your test cases here.
+API Testing SetUp/Config
+---------------------------------------------
+	Used RunScope, API testing & monitoring, tool
+	It supports different JavaScript library, mainly Underscore.js and Chai assertion library which are used in test script.
+	It's mainly web oriented. Install radar-agent to access web services deployed on local machine i.e. localhost.
+	Test Script added in Automation directory
+	
+	API Automation Test Cases from project description:
+	- Test service status of the API endpoint (only one in this case)
+	- Find how many tasks do not have "category" assigned
+	- Aggregate and print only "task names"
+	- Read API response and print tasks in descending "due date" order
+	- Count and validate the number of tasks
+	
+UI Test Automation Setup/Config
+---------------------------------------------
+	Using Eclipse IDE.
+	Selenium WebDriver for Java
+	Test file added in Automation directory
+	Test project's set up requirement
+		- Add JUnit 4 JAR
+		- Add Homecrest.All JAR (homecrest.core as not sufficient enough)
+		- Need to have 'test' folder as Source Folder for Eclipse to find test cases there.
+
+Task Creation, Completion, Removal & Edit
+---------------------------------------------
+- Add a task with no task name. 
+	- Expected: Task shouldn't be created
+- Add a task with no category. 
+	- Expected: Task gets created, assuming it's not created before
+- Add a task with any of the existing category e.g. College/Leisure/Play/Personal/Work
+	- Expected: Task gets created with correct category
+- Add a task with no due date
+	- Expected: Task gets created without due date
+- Add a task with future due date
+	- Expected: Task gets created
+- Add a task with past due date (overdue)
+	- Expected: Task gets created with red text color as it falls under 
+- Add a no category task that exists already
+	- Expected: Task doesn't get created. Eroor message displayed 'Sorry that TODO item already exists'
+- Add a category task without due date that exists already
+	- Expected: Task doesn't get created. Eroor message displayed 'Sorry that TODO item already exists'
+- Add a task that already exists but with different category
+	- Expected: Task doesn't get created. Eroor message displayed 'Sorry that TODO item already exists'
+
+- Complete a selected task
+	- Expected: Selected Task gets completed. i.e. Task name striked through.
+- Complete multiple tasks at once
+	- Expected. All selected Task gets completed. i.e. Task name striked through.
+- Complete without selecting any tasks
+	- Expected: No task change
+- Complete a completed task
+	- Expected: Taks changed to non-complete. i.e. Previous strike through effect on name should disappear
+
+- Remove a selected task
+	- Expected: Selected task is removed
+- Remove multiple tasks at once
+	- Expected: All selected task is removed
+- Remove without selecting any tasks
+	- Expected: No change
+- Remove all tasks {BUG}
+	- Expected: All tasks are removed
+- Edit a task name
+	- Expected: Task name updated
+- Edit a task category 
+	- Expected: Task name color updated to match with category
+- Edit a task due date
+	- Expected: Task due date updated accordingly
+
+Category Creation/Removal/Edits
+-------------------------------------
+- Add a new category without color selection
+- Add a new category with color
+- Add a category that already exists
+- Add category empty category  
+- Remove a category
+- Select "Nevermind" on remove confirmation page
+- Remove all categories {Bug - Deleting all categories except "Overdue" throws Parsing error for empty list}
+- Rename a category 
+- update the color of the category 
+
+Bugs/Enhancements
+-------------------------------------
+- Eeach UI element should be populated with Id attribute for easier and faster UI automation script writing.s
+- Webpage shows error "Warning: Invalid argument supplied for foreach()" if no tasks are in the list
+- Webpage shows error "Warning: Invalid argument supplied for foreach()" if no categories exist
+- Due date should be replaced with Calendar control for enhanced usability.
+- 'Add' button should remain disabled unless task text has some non-empty characters.
+- 'Remove' and 'Complete' button should remain disabled until user selects any task's checkbox.
+- 'Add category' button should remain disabled unless task text has some non-empty characters.
